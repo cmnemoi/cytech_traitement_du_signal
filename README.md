@@ -1,5 +1,8 @@
 # CY Tech - Traitement du signal
 
+[![CI Status](https://github.com/cmnemoi/cytech_traitement_du_signal/actions/workflows/continous_integration.yml/badge.svg?branch=main)](https://github.com/cmnemoi/cytech_traitement_du_signal/actions/workflows/continous_integration.yml) [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cytech-traitement-du-signal.streamlit.app/)
+
+
 Dépôt pour notre projet pour le cours de "Traitement du Signal" de CY Tech. 
 
 Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Jalis Aït-Ouakli, Youssef Saïdi
