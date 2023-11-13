@@ -5,6 +5,9 @@ description = "Projet pour le cours de \"Traitement du Signal\" de CY Tech."
 authors = ["Charles-Meldhine Madi Mnemoi <icdk5b4zf@relay.firefox.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [
+    { include = "app"}
+]
 
 [tool.poetry.dependencies]
 python = ">=3.11, <3.12"
@@ -19,6 +22,7 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.6.0"
 black = "^23.9.1"
+notebook = "^7.0.6"
 
 [tool.poetry.group.test]
 optional = true
