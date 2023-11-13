@@ -8,7 +8,7 @@ lint:
 	poetry run mypy .
 
 run: 
-	poetry run streamlit run app/home.py
+	poetry run streamlit run cytech_traitement_du_signal/home.py
 
 test:
-	poetry run pytest -v --cov=app
+	poetry run pytest -v --cov=cytech_traitement_du_signal
