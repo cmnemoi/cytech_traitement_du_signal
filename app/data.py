@@ -1,7 +1,10 @@
+from typing import Tuple
+
 import numpy as np
+import streamlit as st
 
-
-def load_mnist(path: str = "../data/mnist.npz") -> tuple:
+@st.cache_data()
+def load_mnist(path: str = "data/mnist.npz") -> Tuple[Tuple[np.ndarray, np.ndarray], Tuple[np.ndarray, np.ndarray]]:
     """Load MNIST data from `path`"""
     with np.load(path, allow_pickle=True) as f:
         x_train, y_train = f["x_train"], f["y_train"]

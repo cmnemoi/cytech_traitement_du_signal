@@ -482,6 +482,20 @@ files = [
 colorama = {version = "*", markers = "platform_system == \"Windows\""}
 
 [[package]]
+name = "cmnemoi-learn"
+version = "0.5.0"
+description = "Machine Learning from scratch by Charles-Meldhine Madi Mnemoi"
+optional = false
+python-versions = ">=3.11,<4.0"
+files = [
+    {file = "cmnemoi_learn-0.5.0-py3-none-any.whl", hash = "sha256:74529a22144c7f9524a3802e9450b3601a0f6493d1931734325560bd8243004b"},
+    {file = "cmnemoi_learn-0.5.0.tar.gz", hash = "sha256:ba8d6139949cc4d0211b086c5bc6e1eb3c662fe9d831ef1f56b4638947c1a0b3"},
+]
+
+[package.dependencies]
+numpy = ">=1.25.2,<2.0.0"
+
+[[package]]
 name = "colorama"
 version = "0.4.6"
 description = "Cross-platform colored terminal text."
@@ -2964,6 +2978,26 @@ files = [
 ]
 
 [[package]]
+name = "tqdm"
+version = "4.66.1"
+description = "Fast, Extensible Progress Meter"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tqdm-4.66.1-py3-none-any.whl", hash = "sha256:d302b3c5b53d47bce91fea46679d9c3c6508cf6332229aa1e7d8653723793386"},
+    {file = "tqdm-4.66.1.tar.gz", hash = "sha256:d88e651f9db8d8551a62556d3cff9e3034274ca5d66e93197cf2490e2dcb69c7"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+dev = ["pytest (>=6)", "pytest-cov", "pytest-timeout", "pytest-xdist"]
+notebook = ["ipywidgets (>=6)"]
+slack = ["slack-sdk"]
+telegram = ["requests"]
+
+[[package]]
 name = "traitlets"
 version = "5.13.0"
 description = "Traitlets Python configuration system"
@@ -3191,4 +3225,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11, <3.12"
-content-hash = "791788bef59adaf3a93afa827c9476fe7eb18397ae7dd5d09f6ec84aab24166a"
+content-hash = "05495de6bd3603c7d54eb8afd0d3e3453ef17a4f9474cfb75f14ca44472c3861"
