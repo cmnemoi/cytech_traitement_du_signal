@@ -1,26 +1,35 @@
-from typing import Dict, List
-
+from PIL import Image
 import numpy as np
 import streamlit as st
 
 from data import load_mnist
-from display import get_mnist_image_plot, get_mnist_image_fourier_transform_plot
-from fourier import fourier_transform
+from display import get_image_plot
+from filters import sobel_filter
 
-st.title("Détection et reconnaissance de chiffres manuscrits")
+st.title("Détection de contours d'images")
 st.write(
     "Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Lucas Terra, Jalis Aït-Ouakli, Youssef Saïdi"
 )
 
-st.subheader("Quelques images...")
-(mnist_images, mnist_labels), (_, _) = load_mnist()
+filter_name = st.selectbox("Choisissez votre filtre :", ["Sobel"])
+image_name = st.selectbox("Choisissez votre image :", ["Lena", "Chiffres manuscrits (MNIST)", "Image personnalisée"])
 
-images_by_label: Dict[int, List[np.ndarray]] = {i: [] for i in range(10)}
-for i in range(10):
-    images_by_label[i] = [image for (image, label) in zip(mnist_images, mnist_labels) if label == i]
+match filter_name:
+    case "Sobel":
+        filter = sobel_filter
+    case _:
+        filter = sobel_filter
 
-columns = st.columns(2)
-for i in range(10):
-    for image in images_by_label[i][:1]:
-        columns[0].pyplot(get_mnist_image_plot(image, i))
-        columns[1].pyplot(get_mnist_image_fourier_transform_plot(fourier_transform(image), i))
+match image_name:
+    case "Lena":
+        image = np.array(Image.open("data/lena.jpeg").convert("L"))
+    case "Chiffres manuscrits (MNIST)":
+        (x_train, y_train), (x_test, y_test) = load_mnist()
+        image = x_train[np.random.randint(0, x_train.shape[0])]
+
+if image_name == "Image personnalisée":
+    uploaded_file = st.file_uploader("Choisissez une image...", type=["png", "jpg", "jpeg"])
+
+if image is not None:
+    st.pyplot(get_image_plot(image))
+    st.pyplot(get_image_plot(sobel_filter(image)))

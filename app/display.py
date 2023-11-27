@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-def get_mnist_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
+def get_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
     """Get MNIST image plot
 
     Args:
@@ -15,7 +15,7 @@ def get_mnist_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
         Any: Plot of the image
     """
     figure, axes = plt.subplots()
-    axes.imshow(image)
+    axes.imshow(image, cmap="gray")
     if label is not None:
         axes.text(
             14,
@@ -30,7 +30,7 @@ def get_mnist_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
     return figure
 
 
-def get_mnist_image_fourier_transform_plot(transformed_image: np.ndarray, label: int) -> Any:
+def get_image_fourier_transform_plot(transformed_image: np.ndarray, label: int) -> Any:
     """Get MNIST image Fourier transform plot
 
     Args:
@@ -41,7 +41,7 @@ def get_mnist_image_fourier_transform_plot(transformed_image: np.ndarray, label:
         Any: Plot of the image Fourier transform
     """
     figure, axes = plt.subplots()
-    axes.imshow(transformed_image)
+    axes.imshow(transformed_image, cmap="gray")
     axes.text(
         14,
         0,
