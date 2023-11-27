@@ -41,5 +41,9 @@ st.subheader("A faire")
 st.write(
     """
     - Détailler les maths dans la section "Comment fonctionne un filtre de détection de contours ?" (base du rapport)
+    - Ajouter plusieurs méthodes de seuil pour affiner les contours (seuil arbitraire, par histogramme), le proposer à l'utilisateur dans l'application
+    - Ajouter plus d'images
+    - Ajouter plus de filtres (Canny, Laplacien)
+    - Peut être une explication par filtre / seuil ?
     """
 )
