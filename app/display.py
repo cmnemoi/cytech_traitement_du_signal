@@ -16,6 +16,7 @@ def get_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
     """
     figure, axes = plt.subplots()
     axes.imshow(image, cmap="gray")
+    axes.axis("off")
     if label is not None:
         axes.text(
             14,
@@ -42,6 +43,7 @@ def get_image_fourier_transform_plot(transformed_image: np.ndarray, label: int) 
     """
     figure, axes = plt.subplots()
     axes.imshow(transformed_image, cmap="gray")
+    axes.axis("off")
     axes.text(
         14,
         0,
