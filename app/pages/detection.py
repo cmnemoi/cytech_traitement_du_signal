@@ -10,5 +10,5 @@ st.set_page_config(layout="wide")
 
 st.title("Détection et reconnaissance de chiffres manuscrits")
 st.write(
-    "Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Jalis Aït-Ouakli, Youssef Saïdi"
+    "Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Lucas Terra, Jalis Aït-Ouakli, Youssef Saïdi"
 )
