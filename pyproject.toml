@@ -23,6 +23,7 @@ optional = true
 mypy = "^1.6.0"
 black = "^23.9.1"
 notebook = "^7.0.6"
+types-pillow = "^10.1.0.2"
 
 [tool.poetry.group.test]
 optional = true
