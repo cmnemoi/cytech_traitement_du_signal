@@ -5,7 +5,7 @@
 
 Dépôt pour notre projet pour le cours de "Traitement du Signal" de CY Tech. 
 
-Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Jalis Aït-Ouakli, Youssef Saïdi
+Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Lucas Terra, Jalis Aït-Ouakli, Youssef Saïdi
 
 # Configuration de l'environnement de développment
 
