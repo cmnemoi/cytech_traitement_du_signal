@@ -16,7 +16,7 @@ image_name = st.selectbox("Choisissez votre image :", images.IMAGES_LIST)
 if image_name == "Image personnalisée":
     image_file = st.file_uploader("Chargez votre image...", type=["png", "jpg", "jpeg"])
     if image_file is not None:
-        original_image = images.open_image_from_path(image_file)
+        original_image = images.open_image_from_path_or_binary(image_file)
     else:
         st.stop()
 else:

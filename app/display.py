@@ -3,6 +3,7 @@ from typing import Any, Optional
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 def get_image_plot(image: np.ndarray, label: Optional[str] = None) -> Any:
     """Get image plot
 

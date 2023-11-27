@@ -1,3 +1,5 @@
+from typing import BinaryIO
+
 from PIL import Image
 import numpy as np
 import streamlit as st
@@ -22,18 +24,19 @@ def get_image_by_name(image_name: str) -> np.ndarray:
             (x_train, _), (_, _) = load_mnist()
             image = x_train[np.random.randint(0, x_train.shape[0])]
         case "Lena":
-            image = open_image_from_path("data/lena.png")
+            image = open_image_from_path_or_binary("data/lena.png")
         case _:
             raise ValueError(f"Image {image_name} not implemented")
 
     return image
 
+
 @st.cache_data()
-def open_image_from_path(image_path: str) -> np.ndarray:
+def open_image_from_path_or_binary(image_path: str | BinaryIO) -> np.ndarray:
     """Open image from path
 
     Args:
-        image_path (str): Path to the image
+        image_path (str | BinaryIO): Path to the image, or binary image
 
     Returns:
         np.ndarray: Image as a numpy array
