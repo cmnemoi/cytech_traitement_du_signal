@@ -7,7 +7,7 @@ import streamlit as st
 
 from data import load_mnist
 
-IMAGES_LIST = ["Lena", "Chiffre manuscrit (MNIST)", "Image personnalisée"]
+IMAGES_LIST = ["Lenna", "Image bruitée", "Chiffre manuscrit (MNIST)", "Image personnalisée"]
 
 
 def get_image_by_name(image_name: str) -> np.ndarray:
@@ -23,7 +23,9 @@ def get_image_by_name(image_name: str) -> np.ndarray:
         case "Chiffre manuscrit (MNIST)":
             (x_train, _), (_, _) = load_mnist()
             image = x_train[np.random.randint(0, x_train.shape[0])]
-        case "Lena":
+        case "Image bruitée":
+            image = open_image_from_path_or_binary("data/noised_woman.gif")
+        case "Lenna":
             image = open_image_from_path_or_binary("data/lena.png")
         case _:
             raise ValueError(f"Image {image_name} not implemented")
