@@ -6,7 +6,14 @@ FILTERS_LIST = ["Prewitt", "Sobel"]
 
 
 def get_filter_by_name(filter_name: str) -> Callable:
-    """Get filter by name"""
+    """Get filter by name
+
+    Args:
+        filter_name (str): filter name
+
+    Returns:
+        Callable: filter function
+    """
     match filter_name:
         case "Prewitt":
             return prewitt_filter
@@ -17,48 +24,68 @@ def get_filter_by_name(filter_name: str) -> Callable:
 
 
 def prewitt_filter(image: np.ndarray) -> np.ndarray:
-    """prewitt filter with numpy"""
-    # define filters
-    horizontal = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])  # p_x
-    vertical = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])  # p_y
+    """Prewitt filter.
 
-    # initialize new images
-    new_image_x = np.zeros(image.shape)
-    new_image_y = np.zeros(image.shape)
-    new_image = np.zeros(image.shape)
+    Args:
+        image (np.ndarray): image to apply filter on
 
-    # offset by 1
+    Returns:
+        np.ndarray: filtered image
+    """
+    # Define convolution kernels
+    Px = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]])
+    Py = np.array([[1, 1, 1], [0, 0, 0], [-1, -1, -1]])
+
+    # Initialize image gradients
+    gx = np.zeros(image.shape)
+    gy = np.zeros(image.shape)
+    filtered_image = np.zeros(image.shape)
+
+    # Apply convolution
     for i in range(1, image.shape[0] - 1):
         for j in range(1, image.shape[1] - 1):
-            # apply filter
-            new_image_x[i, j] = np.sum(horizontal * image[i - 1 : i + 2, j - 1 : j + 2])
-            new_image_y[i, j] = np.sum(vertical * image[i - 1 : i + 2, j - 1 : j + 2])
+            gx[i, j] = np.sum(Px * image[i - 1 : i + 2, j - 1 : j + 2])
+            gy[i, j] = np.sum(Py * image[i - 1 : i + 2, j - 1 : j + 2])
 
-    # get magnitude of gradient
-    new_image = np.sqrt(np.square(new_image_x) + np.square(new_image_y))
+    # The filtered image is the norm of the two gradients
+    filtered_image = np.sqrt(np.square(gx) + np.square(gy))
 
-    return new_image
+    # Apply threshold to identify contours
+    filtered_image[filtered_image < 100] = 0
+
+    return filtered_image
 
 
 def sobel_filter(image: np.ndarray) -> np.ndarray:
-    """sobel filter with numpy"""
-    # define filters
-    Sx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])  # s_x
-    Sy = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])  # s_y
+    """Sobel filter.
 
-    # initialize new images
-    new_image_x = np.zeros(image.shape)
-    new_image_y = np.zeros(image.shape)
-    new_image = np.zeros(image.shape)
+    Args:
+        image (np.ndarray): image to apply filter on
 
-    # offset by 1
+    Returns:
+        np.ndarray: filtered image
+    """
+
+    # Define convolution kernels
+    Sx = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]])
+    Sy = np.array([[1, 2, 1], [0, 0, 0], [-1, -2, -1]])
+
+    # Initialize image gradients
+    gx = np.zeros(image.shape)
+    gy = np.zeros(image.shape)
+    filtered_image = np.zeros(image.shape)
+
+    # Apply convolution
     for i in range(1, image.shape[0] - 1):
         for j in range(1, image.shape[1] - 1):
             # apply filter
-            new_image_x[i, j] = np.sum(Sx * image[i - 1 : i + 2, j - 1 : j + 2])
-            new_image_y[i, j] = np.sum(Sy * image[i - 1 : i + 2, j - 1 : j + 2])
+            gx[i, j] = np.sum(Sx * image[i - 1 : i + 2, j - 1 : j + 2])
+            gy[i, j] = np.sum(Sy * image[i - 1 : i + 2, j - 1 : j + 2])
 
-    # get magnitude of gradient
-    new_image = np.sqrt(np.square(new_image_x) + np.square(new_image_y))
+    # The filtered image is the norm of the two gradients
+    filtered_image = np.sqrt(np.square(gx) + np.square(gy))
 
-    return new_image
+    # Apply threshold to identify contours
+    filtered_image[filtered_image < 100] = 0
+
+    return filtered_image
