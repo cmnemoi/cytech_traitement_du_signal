@@ -9,8 +9,8 @@ st.write(
     "Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Lucas Terra, Jalis Aït-Ouakli, Youssef Saïdi"
 )
 
-filter_name = st.selectbox("Choisissez votre filtre :", filters.FILTERS_LIST)
 image_name = st.selectbox("Choisissez votre image :", images.IMAGES_LIST)
+filter_name = st.selectbox("Choisissez votre filtre :", filters.FILTERS_LIST)
 
 if filter_name is not None and image_name is not None:
     selected_filter = filters.get_filter_by_name(filter_name)
@@ -22,5 +22,7 @@ if selected_image is None:
     uploaded_file = st.file_uploader("Choisissez une image...", type=["png", "jpg", "jpeg"])
 
 if selected_image is not None:
+    st.subheader("Image originale")
     st.pyplot(get_image_plot(selected_image))
+    st.subheader("Contours de l'image")
     st.pyplot(get_image_plot(selected_filter(selected_image)))
