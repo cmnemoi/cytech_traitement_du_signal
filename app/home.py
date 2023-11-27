@@ -14,7 +14,7 @@ st.write(
 image_name = st.selectbox("Choisissez votre image :", images.IMAGES_LIST)
 
 if image_name == "Image personnalisée":
-    image_file = st.file_uploader("Chargez votre image...", type=["png", "jpg", "jpeg"])
+    image_file = st.file_uploader("Chargez votre image...", type=["gif", "png", "jpg", "jpeg"])
     if image_file is not None:
         original_image = images.open_image_from_path_or_binary(image_file)
     else:
@@ -22,20 +22,24 @@ if image_name == "Image personnalisée":
 else:
     original_image = images.get_image_by_name(image_name)  # type: ignore
 
-filter_name = st.selectbox("Choisissez votre filtre :", filters.CONTOURS_FILTERS_LIST)
+filter_name = st.selectbox("Choisissez votre filtre de contours :", filters.CONTOURS_FILTERS_LIST)
 remove_noise = st.checkbox("Supprimer le bruit")
+if remove_noise:
+    noise_filter_name = st.selectbox(
+        "Choisissez votre filtre anti-bruit :", filters.ANTI_NOISE_FILTERS_LIST
+    )
+    noise_filter = filters.get_filter_by_name(noise_filter_name)  # type: ignore
+    original_image = noise_filter(original_image)
 
 with st.spinner("Calcul des contours..."):
     selected_filter = filters.get_filter_by_name(filter_name)  # type: ignore
 
-    image_plot = get_image_plot(original_image, label="Image originale")
+    image_plot = get_image_plot(original_image, label="Image originale (débruitée)" if remove_noise else "Image originale")
     filtered_image_plot = get_image_plot(
         selected_filter(original_image), label="Contours de l'image"
     )
     st.pyplot(image_plot)
     st.pyplot(filtered_image_plot)
-
-st.balloons()
 
 if __name__ == "__main__":
     pass
