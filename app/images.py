@@ -1,6 +1,7 @@
-import numpy as np
-
 from PIL import Image
+import numpy as np
+import streamlit as st
+
 
 from data import load_mnist
 
@@ -17,12 +18,24 @@ def get_image_by_name(image_name: str) -> np.ndarray:
         np.ndarray: Image as a numpy array
     """
     match image_name:
-        case "Lena":
-            image = np.array(Image.open("data/lena.jpeg").convert("L"))
         case "Chiffre manuscrit (MNIST)":
             (x_train, _), (_, _) = load_mnist()
             image = x_train[np.random.randint(0, x_train.shape[0])]
+        case "Lena":
+            image = open_image_from_path("data/lena.png")
         case _:
             raise ValueError(f"Image {image_name} not implemented")
 
     return image
+
+@st.cache_data()
+def open_image_from_path(image_path: str) -> np.ndarray:
+    """Open image from path
+
+    Args:
+        image_path (str): Path to the image
+
+    Returns:
+        np.ndarray: Image as a numpy array
+    """
+    return np.array(Image.open(image_path).convert("L"))

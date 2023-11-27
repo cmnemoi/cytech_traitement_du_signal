@@ -1,3 +1,5 @@
+from PIL import Image
+import numpy as np
 import streamlit as st
 
 from display import get_image_plot
@@ -10,19 +12,30 @@ st.write(
 )
 
 image_name = st.selectbox("Choisissez votre image :", images.IMAGES_LIST)
-filter_name = st.selectbox("Choisissez votre filtre :", filters.FILTERS_LIST)
 
-if filter_name is not None and image_name is not None:
-    selected_filter = filters.get_filter_by_name(filter_name)
-    selected_image = (
-        images.get_image_by_name(image_name) if image_name != "Image personnalisée" else None
+if image_name == "Image personnalisée":
+    image_file = st.file_uploader("Chargez votre image...", type=["png", "jpg", "jpeg"])
+    if image_file is not None:
+        original_image = images.open_image_from_path(image_file)
+    else:
+        st.stop()
+else:
+    original_image = images.get_image_by_name(image_name)  # type: ignore
+
+filter_name = st.selectbox("Choisissez votre filtre :", filters.CONTOURS_FILTERS_LIST)
+remove_noise = st.checkbox("Supprimer le bruit")
+
+with st.spinner("Calcul des contours..."):
+    selected_filter = filters.get_filter_by_name(filter_name)  # type: ignore
+
+    image_plot = get_image_plot(original_image, label="Image originale")
+    filtered_image_plot = get_image_plot(
+        selected_filter(original_image), label="Contours de l'image"
     )
+    st.pyplot(image_plot)
+    st.pyplot(filtered_image_plot)
 
-if selected_image is None:
-    uploaded_file = st.file_uploader("Choisissez une image...", type=["png", "jpg", "jpeg"])
+st.balloons()
 
-if selected_image is not None:
-    st.subheader("Image originale")
-    st.pyplot(get_image_plot(selected_image))
-    st.subheader("Contours de l'image")
-    st.pyplot(get_image_plot(selected_filter(selected_image)))
+if __name__ == "__main__":
+    pass
