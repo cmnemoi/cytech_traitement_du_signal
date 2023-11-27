@@ -24,13 +24,13 @@ else:
 
 filter_name = st.selectbox("Choisissez votre filtre de contours :", filters.CONTOURS_FILTERS_LIST)
 threshold_type = st.selectbox(
-    "Choisissez votre méthode de seuillage :", ["Seuil arbitraire", "Histogramme"]
+    "Choisissez votre méthode de seuillage :", ["Arbitraire", "Quantile"]
 )
 
 match threshold_type:
-    case "Seuil arbitraire":
+    case "Arbitraire":
         threshold = st.slider("Seuil :", 0, 255, 100)
-    case "Histogramme":
+    case "Quantile":
         threshold = st.slider("Seuil (quantile du gradient):", 0, 100, 80)
     case _:
         raise ValueError(f"Threshold type {threshold_type} not implemented")
@@ -50,9 +50,9 @@ with st.spinner("Calcul des contours..."):
 
     # Apply threshold
     match threshold_type:
-        case "Seuil arbitraire":
+        case "Arbitraire":
             filtered_image[filtered_image < threshold] = 0
-        case "Histogramme":
+        case "Quantile":
             threshold = np.percentile(filtered_image, threshold)
             filtered_image[filtered_image < threshold] = 0
 
