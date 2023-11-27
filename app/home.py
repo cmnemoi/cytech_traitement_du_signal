@@ -23,6 +23,18 @@ else:
     original_image = images.get_image_by_name(image_name)  # type: ignore
 
 filter_name = st.selectbox("Choisissez votre filtre de contours :", filters.CONTOURS_FILTERS_LIST)
+threshold_type = st.selectbox(
+    "Choisissez votre méthode de seuillage :", ["Seuil arbitraire", "Histogramme"]
+)
+
+match threshold_type:
+    case "Seuil arbitraire":
+        threshold = st.slider("Seuil :", 0, 255, 100)
+    case "Histogramme":
+        threshold = st.slider("Seuil (quantile du gradient):", 0, 100, 80)
+    case _:
+        raise ValueError(f"Threshold type {threshold_type} not implemented")
+
 remove_noise = st.checkbox("Supprimer le bruit")
 if remove_noise:
     noise_filter_name = st.selectbox(
@@ -31,13 +43,24 @@ if remove_noise:
     noise_filter = filters.get_filter_by_name(noise_filter_name)  # type: ignore
     original_image = noise_filter(original_image)
 
-with st.spinner("Calcul des contours..."):
-    selected_filter = filters.get_filter_by_name(filter_name)  # type: ignore
 
-    image_plot = get_image_plot(original_image, label="Image originale (débruitée)" if remove_noise else "Image originale")
-    filtered_image_plot = get_image_plot(
-        selected_filter(original_image), label="Contours de l'image"
+with st.spinner("Calcul des contours..."):
+    contours_filter = filters.get_filter_by_name(filter_name)  # type: ignore
+    filtered_image = contours_filter(original_image)
+
+    # Apply threshold
+    match threshold_type:
+        case "Seuil arbitraire":
+            filtered_image[filtered_image < threshold] = 0
+        case "Histogramme":
+            threshold = np.percentile(filtered_image, threshold)
+            filtered_image[filtered_image < threshold] = 0
+
+    image_plot = get_image_plot(
+        original_image, label="Image originale (débruitée)" if remove_noise else "Image originale"
     )
+    filtered_image_plot = get_image_plot(filtered_image, label="Contours de l'image")
+
     st.pyplot(image_plot)
     st.pyplot(filtered_image_plot)
 

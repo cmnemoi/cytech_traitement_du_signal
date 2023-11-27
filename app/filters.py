@@ -58,6 +58,7 @@ def gaussian_filter(image: np.ndarray) -> np.ndarray:
 
     return filtered_image
 
+
 def median_filter(image: np.ndarray) -> np.ndarray:
     """Median filter.
 
@@ -109,9 +110,6 @@ def prewitt_filter(image: np.ndarray) -> np.ndarray:
     # The filtered image is the norm of the two gradients
     filtered_image = np.sqrt(np.square(gx) + np.square(gy))
 
-    # Apply threshold to identify contours
-    filtered_image[filtered_image < 100] = 0
-
     return filtered_image
 
 
@@ -144,8 +142,5 @@ def sobel_filter(image: np.ndarray) -> np.ndarray:
 
     # The filtered image is the norm of the two gradients
     filtered_image = np.sqrt(np.square(gx) + np.square(gy))
-
-    # Apply threshold to identify contours
-    filtered_image[filtered_image < 100] = 0
 
     return filtered_image
