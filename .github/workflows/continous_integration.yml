@@ -32,6 +32,8 @@ jobs:
         version: '1.6.1'
     - name: Install dependencies
       run: poetry install --with=dev
+    - name: Install type stubs for Mypy
+      run: poetry run mypy --install-types --non-interactive
     - name: Check code style with Black
       run: poetry run black --check .
     - name: Check types with Mypy
