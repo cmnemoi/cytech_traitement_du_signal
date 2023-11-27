@@ -2,6 +2,7 @@
 
 set -e
 
+POETRY_VERSION="1.6.1"
 PYENV_ROOT="$HOME/.pyenv"
 PYTHON_VERSION="3.11.6"
 PYTHON_DIR_PATH="$PYENV_ROOT/versions/$PYTHON_VERSION"
@@ -27,7 +28,7 @@ else
 fi
 
 echo "Installation de Poetry..."
-curl -sSL https://install.python-poetry.org | python3 -
+curl -sSL https://install.python-poetry.org | python3 - --version $POETRY_VERSION
 poetry config virtualenvs.in-project true
 echo "Poetry installé avec succès !"
 

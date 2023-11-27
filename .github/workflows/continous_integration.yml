@@ -28,6 +28,8 @@ jobs:
         python-version: '3.11.6'
     - name: Install Poetry
       uses: snok/install-poetry@v1
+      with:
+        version: '1.6.1'
     - name: Install dependencies
       run: poetry install --with=dev
     - name: Check code style with Black
@@ -46,6 +48,8 @@ jobs:
         python-version: '3.11.6'
     - name: Install Poetry
       uses: snok/install-poetry@v1
+      with:
+        version: '1.6.1'
     - name: Install dependencies
       run: poetry install --with=test
     - name: Run unit tests with Pytest
