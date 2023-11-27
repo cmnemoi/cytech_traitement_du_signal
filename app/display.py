@@ -17,7 +17,15 @@ def get_mnist_image_plot(image: np.ndarray, label: Optional[int] = None) -> Any:
     figure, axes = plt.subplots()
     axes.imshow(image)
     if label is not None:
-        axes.text(14, 0, f"Digit image - {label}", ha="center", fontweight="bold", color="k", backgroundcolor="y")
+        axes.text(
+            14,
+            0,
+            f"Digit image - {label}",
+            ha="center",
+            fontweight="bold",
+            color="k",
+            backgroundcolor="y",
+        )
 
     return figure
 
@@ -34,6 +42,14 @@ def get_mnist_image_fourier_transform_plot(transformed_image: np.ndarray, label:
     """
     figure, axes = plt.subplots()
     axes.imshow(transformed_image)
-    axes.text(14, 0, f"Digit image fourier transform - {label}", ha="center", fontweight="bold", color="k", backgroundcolor="y")
+    axes.text(
+        14,
+        0,
+        f"Digit image fourier transform - {label}",
+        ha="center",
+        fontweight="bold",
+        color="k",
+        backgroundcolor="y",
+    )
 
     return figure
