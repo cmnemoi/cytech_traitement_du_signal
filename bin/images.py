@@ -5,7 +5,7 @@ import numpy as np
 import streamlit as st
 
 
-from data import load_mnist
+from .data import load_mnist
 
 IMAGES_LIST = ["Lenna", "Image bruitée", "Chiffre manuscrit (MNIST)", "Image personnalisée"]
 
