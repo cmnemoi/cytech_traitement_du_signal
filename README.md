@@ -7,6 +7,17 @@ Dépôt pour notre projet pour le cours de "Traitement du Signal" de CY Tech.
 
 Auteurs : Aïcha Lehbib, Ahmed Ouinekh, Charles-Meldhine Madi Mnemoi, Lucas Terra, Jalis Aït-Ouakli, Youssef Saïdi
 
+# Lancer l'application
+
+## En ligne
+
+Cliquer ici : [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cytech-traitement-du-signal.streamlit.app/) ou ici : https://cytech-traitement-du-signal.streamlit.app/
+
+## Localement
+
+- Installer les dépendances : `python -m pip install -r requirements.txt`
+- Lancer l'application : `python -m streamlit run app/home.py`
+
 # Configuration de l'environnement de développment
 
 ## Aparté pour les utilisateurs Windows
