@@ -23,9 +23,7 @@ else:
     original_image = images.get_image_by_name(image_name)  # type: ignore
 
 filter_name = st.selectbox("Choisissez votre filtre de contours :", filters.CONTOURS_FILTERS_LIST)
-threshold_type = st.selectbox(
-    "Choisissez votre méthode de seuillage :", ["Arbitraire", "Quantile"]
-)
+threshold_type = st.selectbox("Choisissez votre méthode de seuillage :", ["Arbitraire", "Quantile"])
 
 match threshold_type:
     case "Arbitraire":
